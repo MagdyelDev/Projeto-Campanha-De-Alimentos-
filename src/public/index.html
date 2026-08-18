@@ -4,17 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Panela Solidária - Campanha de arrecadação de alimentos para combater a fome">
-    <meta name="theme-color" content="#FF6B00">
+    <meta name="theme-color" content="#ED6325">
     <title>Panela Solidária - Campanha de Doação de Alimentos</title>
-    
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-    
+
     <!-- Estilos -->
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <!-- HEADER FIXO -->
+    <!-- HEADER FIXO (pílula flutuante) -->
     <header class="header" id="header">
         <nav class="navbar">
             <div class="container">
@@ -22,9 +22,9 @@
                 <div class="logo">
                     <h1>🍲 Panela Solidária</h1>
                 </div>
-                
+
                 <!-- Menu hamburguer -->
-                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
@@ -32,7 +32,7 @@
 
                 <!-- Menu navegação -->
                 <ul class="nav-menu" id="navMenu">
-                    <li><a href="#inicio" class="nav-link">Início</a></li>
+                    <li><a href="#inicio" class="nav-link active">Início</a></li>
                     <li><a href="#sobre" class="nav-link">Sobre</a></li>
                     <li><a href="#como-doar" class="nav-link">Como Doar</a></li>
                     <li><a href="#pontos-coleta" class="nav-link">Pontos de Coleta</a></li>
@@ -49,18 +49,22 @@
         <!-- SEÇÃO HERO -->
         <section class="hero" id="inicio">
             <div class="hero-overlay"></div>
+
             <div class="hero-content">
                 <h2 class="hero-title">Uma Mão Amiga Começa com um Prato Cheio</h2>
                 <p class="hero-subtitle">Muitas famílias enfrentam a fome diariamente. Suas doações levam esperança, nutrição e dignidade a quem mais precisa.</p>
                 <button class="btn-cta" id="btnDoarHero">QUERO DOAR</button>
             </div>
+
+            <img src="src\assets\decorate.svg" alt="" aria-hidden="true" class="hero-deco hero-deco--left">
+            <img src="src\assets\decorate.svg" alt="" aria-hidden="true" class="hero-deco hero-deco--right">
         </section>
 
         <!-- SEÇÃO SOBRE A CAMPANHA -->
         <section class="sobre" id="sobre">
             <div class="container">
                 <h2 class="section-title">Sobre a Campanha</h2>
-                
+
                 <!-- Timeline -->
                 <div class="timeline">
                     <div class="timeline-item left" data-aos="fade-up">
@@ -110,7 +114,7 @@
         <section class="como-doar" id="como-doar">
             <div class="container">
                 <h2 class="section-title">Como Doar</h2>
-                
+
                 <div class="cards-container">
                     <!-- Card 1: Dinheiro/PIX -->
                     <div class="card" data-aos="zoom-in">
@@ -160,9 +164,8 @@
         <section class="pontos-coleta" id="pontos-coleta">
             <div class="container">
                 <h2 class="section-title">Pontos de Coleta</h2>
-                
+
                 <div class="grid-pontos">
-                    <!-- Ponto 1 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Centro Comunitário Brasil</h3>
                         <p><strong>Endereço:</strong> Rua das Flores, 123 - Centro</p>
@@ -170,7 +173,6 @@
                         <p><strong>Contato:</strong> (11) 3333-3333</p>
                     </div>
 
-                    <!-- Ponto 2 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Supermercado Solidário</h3>
                         <p><strong>Endereço:</strong> Av. Paulista, 500 - Bela Vista</p>
@@ -178,7 +180,6 @@
                         <p><strong>Contato:</strong> (11) 4444-4444</p>
                     </div>
 
-                    <!-- Ponto 3 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Biblioteca Municipal</h3>
                         <p><strong>Endereço:</strong> Praça da República, 789 - Vila Nova</p>
@@ -186,7 +187,6 @@
                         <p><strong>Contato:</strong> (11) 5555-5555</p>
                     </div>
 
-                    <!-- Ponto 4 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Paróquia Santo Antônio</h3>
                         <p><strong>Endereço:</strong> Rua da Paz, 456 - Santa Ana</p>
@@ -194,7 +194,6 @@
                         <p><strong>Contato:</strong> (11) 6666-6666</p>
                     </div>
 
-                    <!-- Ponto 5 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Associação de Bairro Esperança</h3>
                         <p><strong>Endereço:</strong> Rua Esperança, 321 - Zona Leste</p>
@@ -202,7 +201,6 @@
                         <p><strong>Contato:</strong> (11) 7777-7777</p>
                     </div>
 
-                    <!-- Ponto 6 -->
                     <div class="ponto-card" data-aos="fade-up">
                         <h3>📍 Escola Municipal Luz</h3>
                         <p><strong>Endereço:</strong> Rua da Educação, 999 - Zona Oeste</p>
@@ -217,19 +215,19 @@
         <section class="parceiros" id="parceiros">
             <div class="container">
                 <h2 class="section-title">Nossos Parceiros</h2>
-                
+
                 <div class="grid-parceiros">
                     <div class="parceiro-logo" data-aos="zoom-in">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 1%3C/text%3E%3C/svg%3E" alt="Parceiro 1">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23ED6325' width='150' height='80'/%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 1%3C/text%3E%3C/svg%3E" alt="Parceiro 1">
                     </div>
                     <div class="parceiro-logo" data-aos="zoom-in">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 2%3C/text%3E%3C/svg%3E" alt="Parceiro 2">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23ED6325' width='150' height='80'/%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 2%3C/text%3E%3C/svg%3E" alt="Parceiro 2">
                     </div>
                     <div class="parceiro-logo" data-aos="zoom-in">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 3%3C/text%3E%3C/svg%3E" alt="Parceiro 3">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23ED6325' width='150' height='80'/%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 3%3C/text%3E%3C/svg%3E" alt="Parceiro 3">
                     </div>
                     <div class="parceiro-logo" data-aos="zoom-in">
-                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 4%3C/text%3E%3C/svg%3E" alt="Parceiro 4">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23ED6325' width='150' height='80'/%3E%3Ctext x='50%25' y='50%25' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 4%3C/text%3E%3C/svg%3E" alt="Parceiro 4">
                     </div>
                 </div>
             </div>
@@ -239,10 +237,10 @@
         <section class="contato" id="contato">
             <div class="container">
                 <h2 class="section-title">Entre em Contato</h2>
-                
+
                 <div class="contato-wrapper">
                     <!-- Formulário -->
-                    <form class="formulario" id="formularioContato">
+                    <form class="formulario" id="formularioContato" novalidate>
                         <div class="form-group">
                             <label for="nome">Nome *</label>
                             <input type="text" id="nome" name="nome" required>
@@ -300,7 +298,7 @@
         <div class="modal-content">
             <span class="close" id="closeModal">&times;</span>
             <h2>Realizar Doação</h2>
-            
+
             <div class="modal-tabs">
                 <button class="tab-btn active" data-tab="cadastro-doador">Cadastro de Doador</button>
                 <button class="tab-btn" data-tab="cadastro-alimento">Cadastro de Alimento</button>
@@ -395,29 +393,6 @@
         </div>
     </footer>
 
-    <!-- Scripts - Camada de Modelos -->
-    <script src="../models/Endereco.js"></script>
-    <script src="../models/Alimento.js"></script>
-    <script src="../models/Doador.js"></script>
-    <script src="../models/Doacao.js"></script>
-
-    <!-- Scripts - Camada de Repositórios -->
-    <script src="../repositories/EnderecoRepository.js"></script>
-    <script src="../repositories/AlimentoRepository.js"></script>
-    <script src="../repositories/DoadorRepository.js"></script>
-    <script src="../repositories/DoacaoRepository.js"></script>
-
-    <!-- Scripts - Camada de Serviços -->
-    <script src="../services/DoadorService.js"></script>
-    <script src="../services/AlimentoService.js"></script>
-    <script src="../services/DoacaoService.js"></script>
-
-    <!-- Scripts - Camada de Controllers -->
-    <script src="../controllers/DoadorController.js"></script>
-    <script src="../controllers/AlimentoController.js"></script>
-    <script src="../controllers/DoacaoController.js"></script>
-
-    <!-- Scripts - Aplicação -->
     <script src="js/app.js"></script>
 </body>
 </html>

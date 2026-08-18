@@ -1,419 +1,301 @@
-// ====================================
-// CONTROLADORES DA APLICAÇÃO
-// ====================================
-
-const doadorController = new DoadorController();
-const alimentoController = new AlimentoController();
-const doacaoController = new DoacaoController();
-
-// ====================================
-// ELEMENTOS DO DOM
-// ====================================
-
-const header = document.getElementById('header');
-const menuToggle = document.getElementById('menuToggle');
-const navMenu = document.getElementById('navMenu');
-const navLinks = document.querySelectorAll('.nav-link');
-const btnDoarHeader = document.getElementById('btnDoarHeader');
-const btnDoarHero = document.getElementById('btnDoarHero');
-
-const modal = document.getElementById('modalDoacao');
-const closeModal = document.getElementById('closeModal');
-const tabBtns = document.querySelectorAll('.tab-btn');
-const tabContents = document.querySelectorAll('.tab-content');
-
-const formularioContato = document.getElementById('formularioContato');
-
-// ====================================
-// HEADER E NAVEGAÇÃO
-// ====================================
-
-menuToggle.addEventListener('click', () => {
-  menuToggle.classList.toggle('active');
-  navMenu.classList.toggle('active');
-});
-
-navLinks.forEach(link => {
-  link.addEventListener('click', () => {
-    menuToggle.classList.remove('active');
-    navMenu.classList.remove('active');
-  });
-});
-
-/**
- * Efeito de sombra no header ao fazer scroll
- */
-window.addEventListener('scroll', () => {
-  if (window.scrollY > 50) {
-    header.classList.add('scrolled');
-  } else {
-    header.classList.remove('scrolled');
-  }
-
-  // Atualizar link ativo conforme scroll
-  atualizarNavActive();
-});
-
-function atualizarNavActive() {
-  const secoes = document.querySelectorAll('section');
-  let secaoAtiva = '';
-
-  secoes.forEach(secao => {
-    const top = secao.offsetTop;
-    const altura = secao.clientHeight;
-    if (window.scrollY >= top - 200) {
-      secaoAtiva = secao.getAttribute('id');
-    }
-  });
-
-  navLinks.forEach(link => {
-    link.classList.remove('active');
-    if (link.getAttribute('href').includes(secaoAtiva)) {
-      link.classList.add('active');
-    }
-  });
-}
-
-// ====================================
-// MODAL E ABAS
-// ====================================
-
-function abrirModal() {
-  modal.classList.add('show');
-  document.body.style.overflow = 'hidden';
-  carregarDoadores();
-  atualizarListaDoacoes();
-}
-
-function fecharModal() {
-  modal.classList.remove('show');
-  document.body.style.overflow = 'auto';
-}
-
-btnDoarHeader.addEventListener('click', (e) => {
-  e.preventDefault();
-  abrirModal();
-});
-
-btnDoarHero.addEventListener('click', abrirModal);
-
-closeModal.addEventListener('click', fecharModal);
-
-window.addEventListener('click', (e) => {
-  if (e.target === modal) {
-    fecharModal();
-  }
-});
-
-tabBtns.forEach(btn => {
-  btn.addEventListener('click', () => {
-    const tabName = btn.getAttribute('data-tab');
-    
-    // Remover classe active de todos os botões
-    tabBtns.forEach(b => b.classList.remove('active'));
-    
-    // Adicionar classe active ao botão clicado
-    btn.classList.add('active');
-    
-    // Ocultar todos os conteúdos
-    tabContents.forEach(content => content.classList.remove('active'));
-    
-    // Mostrar o conteúdo da aba selecionada
-    document.getElementById(tabName).classList.add('active');
-  });
-});
-
-// ====================================
-// CADASTRO DE DOADOR
-// ====================================
-
-const formCadastroDoador = document.getElementById('formCadastroDoador');
-const msgCadastroDoador = document.getElementById('msgCadastroDoador');
-
-formCadastroDoador.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const req = {
-    nome: document.getElementById('doadorNome').value,
-    telefone: document.getElementById('doadorTelefone').value,
-    email: document.getElementById('doadorEmail').value,
-    rua: document.getElementById('doadorRua').value,
-    numero: document.getElementById('doadorNumero').value,
-    bairro: document.getElementById('doadorBairro').value,
-    cidade: document.getElementById('doadorCidade').value,
-    cep: document.getElementById('doadorCep').value
-  };
-
-  const resultado = doadorController.cadastrarDoador(req);
-
-  if (resultado.sucesso) {
-    mostrarMensagem(msgCadastroDoador, resultado.mensagem, 'success');
-    formCadastroDoador.reset();
-    setTimeout(() => carregarDoadores(), 500);
-  } else {
-    mostrarMensagem(msgCadastroDoador, resultado.mensagem, 'error');
-  }
-});
-
-function carregarDoadores() {
-  const resultado = doadorController.listarDoadores();
-  const selectDoador = document.getElementById('doacaoDoador');
-  
-  if (resultado.sucesso && resultado.dados.length > 0) {
-    const optionsPadrao = '<option value="">Selecione um doador</option>';
-    const optionsDoadores = resultado.dados
-      .map(d => `<option value="${d.id}">${d.nome} (${d.email})</option>`)
-      .join('');
-    
-    selectDoador.innerHTML = optionsPadrao + optionsDoadores;
-  }
-}
-
-// ====================================
-// CADASTRO DE ALIMENTO
-// ====================================
-
-const formCadastroAlimento = document.getElementById('formCadastroAlimento');
-const msgCadastroAlimento = document.getElementById('msgCadastroAlimento');
-
-formCadastroAlimento.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const req = {
-    nome: document.getElementById('alimentoNome').value,
-    quantidade: document.getElementById('alimentoQuantidade').value,
-    unidade: document.getElementById('alimentoUnidade').value,
-    descricao: document.getElementById('alimentoDescricao').value
-  };
-
-  const resultado = alimentoController.cadastrarAlimento(req);
-
-  if (resultado.sucesso) {
-    mostrarMensagem(msgCadastroAlimento, resultado.mensagem, 'success');
-    formCadastroAlimento.reset();
-    setTimeout(() => carregarAlimentos(), 500);
-  } else {
-    mostrarMensagem(msgCadastroAlimento, resultado.mensagem, 'error');
-  }
-});
-
-function carregarAlimentos() {
-  const resultado = alimentoController.listarAlimentos();
-  const container = document.getElementById('alimentosSelecionaveis');
-
-  if (resultado.sucesso && resultado.dados.length > 0) {
-    const alimentosHTML = resultado.dados
-      .map(a => `
-        <div class="alimento-checkbox" style="display: flex; align-items: center; gap: 10px; margin: 10px 0; padding: 10px; background: #F5F5F5; border-radius: 4px;">
-          <input type="checkbox" value="${a.id}" class="alimento-check" id="alim_${a.id}">
-          <label for="alim_${a.id}" style="cursor: pointer; margin: 0; flex-grow: 1;">
-            ${a.nome} - ${a.quantidade} ${a.unidade}
-          </label>
-        </div>
-      `)
-      .join('');
-    
-    container.innerHTML = alimentosHTML;
-  } else {
-    container.innerHTML = '<p style="color: #666; padding: 10px;">Nenhum alimento cadastrado. Cadastre primeiro na aba anterior.</p>';
-  }
-}
-
-// ====================================
-// REGISTRAR DOAÇÃO
-// ====================================
-
-const formRegistrarDoacao = document.getElementById('formRegistrarDoacao');
-const msgRegistrarDoacao = document.getElementById('msgRegistrarDoacao');
-
-formRegistrarDoacao.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const doadorId = document.getElementById('doacaoDoador').value;
-  const alimentosSelecionados = Array.from(document.querySelectorAll('.alimento-check:checked'))
-    .map(check => ({ id: check.value, quantidadeDoada: 1 }));
-
-  if (!doadorId) {
-    mostrarMensagem(msgRegistrarDoacao, 'Selecione um doador', 'error');
-    return;
-  }
-
-  if (alimentosSelecionados.length === 0) {
-    mostrarMensagem(msgRegistrarDoacao, 'Selecione pelo menos um alimento', 'error');
-    return;
-  }
-
-  const resultado = doacaoController.registrarDoacao({
-    doadorId: doadorId,
-    alimentos: alimentosSelecionados
-  });
-
-  if (resultado.sucesso) {
-    mostrarMensagem(msgRegistrarDoacao, resultado.mensagem, 'success');
-    formRegistrarDoacao.reset();
-    document.querySelectorAll('.alimento-check').forEach(c => c.checked = false);
-    setTimeout(() => atualizarListaDoacoes(), 500);
-  } else {
-    mostrarMensagem(msgRegistrarDoacao, resultado.mensagem, 'error');
-  }
-});
-
-function atualizarListaDoacoes() {
-  const resultado = doacaoController.listarDoacoes();
-  const container = document.getElementById('listaDoacoes');
-
-  if (resultado.sucesso && resultado.dados.length > 0) {
-    const doacoesHTML = resultado.dados
-      .map(d => {
-        const dataFormatada = new Date(d.dataDoacao).toLocaleDateString('pt-BR');
-        const alimentosTexto = d.alimentos
-          .map(a => `${a.nome} (${a.quantidade} ${a.unidade})`)
-          .join(', ');
-        
-        return `
-          <div class="doacao-item">
-            <h4>Doação #${d.id.substring(0, 8)}</h4>
-            <p><strong>Data:</strong> ${dataFormatada}</p>
-            <p><strong>Doador:</strong> ${d.doador.nome}</p>
-            <p><strong>Alimentos:</strong> ${alimentosTexto}</p>
-            <p><strong>Status:</strong> ${d.status}</p>
-          </div>
-        `;
-      })
-      .join('');
-    
-    container.innerHTML = doacoesHTML;
-  } else {
-    container.innerHTML = '<p style="color: #666; padding: 10px;">Nenhuma doação registrada ainda.</p>';
-  }
-}
-
-// ====================================
-// FORMULÁRIO DE CONTATO
-// ====================================
-
-formularioContato.addEventListener('submit', (e) => {
-  e.preventDefault();
-
-  const nome = document.getElementById('nome').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const mensagem = document.getElementById('mensagem').value.trim();
-
-  // Limpar mensagens de erro
-  document.querySelectorAll('.error').forEach(el => el.classList.remove('show'));
-
-  let temErro = false;
-
-  // Validar nome
-  if (nome === '' || nome.length < 3) {
-    mostrarErro('erroNome', 'Digite um nome com mínimo 3 caracteres');
-    temErro = true;
-  }
-
-  // Validar email
-  const regexEmail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-  if (!regexEmail.test(email)) {
-    mostrarErro('erroEmail', 'Digite um e-mail válido');
-    temErro = true;
-  }
-
-  // Validar mensagem
-  if (mensagem === '' || mensagem.length < 10) {
-    mostrarErro('erroMensagem', 'A mensagem deve ter mínimo 10 caracteres');
-    temErro = true;
-  }
-
-  if (temErro) {
-    return;
-  }
-
-  // Simular envio
-  const formInfo = document.getElementById('formInfo');
-  formInfo.textContent = 'Enviando mensagem...';
-  formInfo.classList.add('success');
-
-  setTimeout(() => {
-    formInfo.textContent = '✓ Mensagem enviada com sucesso! Obrigado por entrar em contato.';
-    formularioContato.reset();
-
-    setTimeout(() => {
-      formInfo.classList.remove('success');
-    }, 3000);
-  }, 1500);
-});
-
-/**
- * Mostra mensagem de erro no formulário de contato
- */
-function mostrarErro(elementoId, mensagem) {
-  const elemento = document.getElementById(elementoId);
-  elemento.textContent = mensagem;
-  elemento.classList.add('show');
-}
-
-// ====================================
-// UTILITÁRIOS
-// ====================================
-
-function mostrarMensagem(elemento, texto, tipo) {
-  elemento.textContent = texto;
-  elemento.classList.remove('error', 'success');
-  elemento.classList.add(tipo);
-  
-  setTimeout(() => {
-    elemento.classList.remove(tipo);
-  }, 3000);
-}
-
-// ====================================
-// ANIMAÇÕES COM INTERSECTION OBSERVER
-// ====================================
-
-const observerOptions = {
-  threshold: 0.1,
-  rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(entry => {
-    if (entry.isIntersecting) {
-      entry.target.style.opacity = '1';
-      entry.target.style.transform = 'translateY(0)';
-    }
-  });
-}, observerOptions);
-
-// Aplicar observer aos elementos com data-aos
-document.querySelectorAll('[data-aos]').forEach(element => {
-  element.style.opacity = '0';
-  element.style.transform = 'translateY(20px)';
-  element.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
-  observer.observe(element);
-});
-
-// ====================================
-// INICIALIZAÇÃO
-// ====================================
-
 document.addEventListener('DOMContentLoaded', () => {
-  console.log('🍲 Panela Solidária iniciada!');
-  console.log('Arquitetura em camadas carregada com sucesso.');
-  
-  // Carregar dados iniciais
-  carregarDoadores();
-  carregarAlimentos();
-  atualizarListaDoacoes();
+
+  /* ==========================================================
+     Header — sombra mais forte ao rolar
+     ========================================================== */
+  const header = document.getElementById('header');
+  const onScroll = () => header.classList.toggle('scrolled', window.scrollY > 12);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  /* ==========================================================
+     Menu mobile
+     ========================================================== */
+  const menuToggle = document.getElementById('menuToggle');
+  const navMenu = document.getElementById('navMenu');
+
+  menuToggle.addEventListener('click', () => {
+    const isOpen = navMenu.classList.toggle('active');
+    menuToggle.classList.toggle('active', isOpen);
+    menuToggle.setAttribute('aria-expanded', String(isOpen));
+  });
+
+  navMenu.querySelectorAll('.nav-link').forEach(link => {
+    link.addEventListener('click', () => {
+      navMenu.classList.remove('active');
+      menuToggle.classList.remove('active');
+      menuToggle.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* ==========================================================
+     Scrollspy — destaca o link ativo conforme a seção visível
+     ========================================================== */
+  const navLinks = Array.from(document.querySelectorAll('.nav-link'));
+  const sections = navLinks
+    .map(link => document.querySelector(link.getAttribute('href')))
+    .filter(Boolean);
+
+  const spyObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = `#${entry.target.id}`;
+        navLinks.forEach(link => {
+          link.classList.toggle('active', link.getAttribute('href') === id);
+        });
+      }
+    });
+  }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+
+  sections.forEach(section => spyObserver.observe(section));
+
+  /* ==========================================================
+     Revelação ao rolar (substitui a biblioteca AOS)
+     ========================================================== */
+  const aosItems = document.querySelectorAll('[data-aos]');
+  const aosObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('aos-visible');
+        aosObserver.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.2 });
+
+  aosItems.forEach(item => aosObserver.observe(item));
+
+  /* ==========================================================
+     Modal de doação
+     ========================================================== */
+  const modal = document.getElementById('modalDoacao');
+  const closeModal = document.getElementById('closeModal');
+  const btnDoarHeader = document.getElementById('btnDoarHeader');
+  const btnDoarHero = document.getElementById('btnDoarHero');
+
+  const openModal = (e) => {
+    if (e) e.preventDefault();
+    modal.classList.add('show');
+    document.body.style.overflow = 'hidden';
+  };
+
+  const closeModalFn = () => {
+    modal.classList.remove('show');
+    document.body.style.overflow = '';
+  };
+
+  btnDoarHeader.addEventListener('click', openModal);
+  btnDoarHero.addEventListener('click', openModal);
+  closeModal.addEventListener('click', closeModalFn);
+
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) closeModalFn();
+  });
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('show')) closeModalFn();
+  });
+
+  /* ---------- Abas do modal ---------- */
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.tab;
+
+      tabBtns.forEach(b => b.classList.remove('active'));
+      tabContents.forEach(c => c.classList.remove('active'));
+
+      btn.classList.add('active');
+      document.getElementById(target).classList.add('active');
+    });
+  });
+
+  /* ==========================================================
+     Mini-CRUD de doações — tudo em memória, sem backend.
+     Os dados somem ao recarregar a página; é só uma demonstração
+     funcional da interface até haver um backend real conectado.
+     ========================================================== */
+  const doadores = [];
+  const alimentos = [];
+  const doacoes = [];
+
+  const selectDoador = document.getElementById('doacaoDoador');
+  const alimentosSelecionaveis = document.getElementById('alimentosSelecionaveis');
+  const listaDoacoes = document.getElementById('listaDoacoes');
+
+  function showMsg(elId, text, type) {
+    const el = document.getElementById(elId);
+    el.textContent = text;
+    el.className = type;
+  }
+
+  // --- Cadastro de doador ---
+  document.getElementById('formCadastroDoador').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const doador = {
+      id: Date.now(),
+      nome: document.getElementById('doadorNome').value.trim(),
+      telefone: document.getElementById('doadorTelefone').value.trim(),
+      email: document.getElementById('doadorEmail').value.trim(),
+      rua: document.getElementById('doadorRua').value.trim(),
+      numero: document.getElementById('doadorNumero').value.trim(),
+      bairro: document.getElementById('doadorBairro').value.trim(),
+      cidade: document.getElementById('doadorCidade').value.trim(),
+      cep: document.getElementById('doadorCep').value.trim(),
+    };
+
+    if (!doador.nome || !doador.email) {
+      showMsg('msgCadastroDoador', 'Preencha ao menos nome e e-mail.', 'error');
+      return;
+    }
+
+    doadores.push(doador);
+
+    const option = document.createElement('option');
+    option.value = doador.id;
+    option.textContent = doador.nome;
+    selectDoador.appendChild(option);
+
+    showMsg('msgCadastroDoador', `Doador "${doador.nome}" cadastrado com sucesso!`, 'success');
+    e.target.reset();
+  });
+
+  // --- Cadastro de alimento ---
+  document.getElementById('formCadastroAlimento').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const alimento = {
+      id: Date.now(),
+      nome: document.getElementById('alimentoNome').value.trim(),
+      quantidade: document.getElementById('alimentoQuantidade').value,
+      unidade: document.getElementById('alimentoUnidade').value.trim(),
+      descricao: document.getElementById('alimentoDescricao').value.trim(),
+    };
+
+    if (!alimento.nome || !alimento.quantidade || !alimento.unidade) {
+      showMsg('msgCadastroAlimento', 'Preencha nome, quantidade e unidade.', 'error');
+      return;
+    }
+
+    alimentos.push(alimento);
+
+    const label = document.createElement('label');
+    label.className = 'alimento-check';
+    label.innerHTML = `
+      <input type="checkbox" value="${alimento.id}">
+      ${alimento.nome} — ${alimento.quantidade} ${alimento.unidade}
+    `;
+    alimentosSelecionaveis.appendChild(label);
+
+    showMsg('msgCadastroAlimento', `Alimento "${alimento.nome}" cadastrado com sucesso!`, 'success');
+    e.target.reset();
+  });
+
+  // --- Registrar doação ---
+  document.getElementById('formRegistrarDoacao').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const doadorId = selectDoador.value;
+    const checkboxes = alimentosSelecionaveis.querySelectorAll('input[type="checkbox"]:checked');
+
+    if (!doadorId) {
+      showMsg('msgRegistrarDoacao', 'Selecione um doador antes de registrar.', 'error');
+      return;
+    }
+
+    if (checkboxes.length === 0) {
+      showMsg('msgRegistrarDoacao', 'Selecione ao menos um alimento.', 'error');
+      return;
+    }
+
+    const doador = doadores.find(d => d.id === Number(doadorId));
+    const itensSelecionados = Array.from(checkboxes).map(cb =>
+      alimentos.find(a => a.id === Number(cb.value))
+    );
+
+    const doacao = {
+      id: Date.now(),
+      doador,
+      itens: itensSelecionados,
+      data: new Date().toLocaleDateString('pt-BR'),
+    };
+
+    doacoes.push(doacao);
+
+    const item = document.createElement('div');
+    item.className = 'doacao-item';
+    item.innerHTML = `
+      <h4>${doador.nome}</h4>
+      <p><strong>Data:</strong> ${doacao.data}</p>
+      <p><strong>Itens:</strong> ${itensSelecionados.map(i => `${i.nome} (${i.quantidade} ${i.unidade})`).join(', ')}</p>
+    `;
+    listaDoacoes.prepend(item);
+
+    showMsg('msgRegistrarDoacao', 'Doação registrada com sucesso!', 'success');
+    e.target.reset();
+    checkboxes.forEach(cb => { cb.checked = false; });
+  });
+
+  /* ==========================================================
+     Formulário de contato (seção Contato, fora do modal)
+     ========================================================== */
+  const formContato = document.getElementById('formularioContato');
+  const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  function setError(fieldId, errorId, message) {
+    const errorEl = document.getElementById(errorId);
+    if (message) {
+      errorEl.textContent = message;
+      errorEl.classList.add('show');
+    } else {
+      errorEl.textContent = '';
+      errorEl.classList.remove('show');
+    }
+  }
+
+  formContato.addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const nome = document.getElementById('nome').value.trim();
+    const email = document.getElementById('email').value.trim();
+    const mensagem = document.getElementById('mensagem').value.trim();
+    const formInfo = document.getElementById('formInfo');
+
+    let valido = true;
+
+    if (!nome) {
+      setError('nome', 'erroNome', 'Digite seu nome.');
+      valido = false;
+    } else {
+      setError('nome', 'erroNome', '');
+    }
+
+    if (!email || !emailPattern.test(email)) {
+      setError('email', 'erroEmail', 'Digite um e-mail válido.');
+      valido = false;
+    } else {
+      setError('email', 'erroEmail', '');
+    }
+
+    if (!mensagem) {
+      setError('mensagem', 'erroMensagem', 'Escreva sua mensagem.');
+      valido = false;
+    } else {
+      setError('mensagem', 'erroMensagem', '');
+    }
+
+    if (!valido) {
+      formInfo.className = 'form-info';
+      formInfo.textContent = '';
+      return;
+    }
+
+    // Sem backend conectado ainda — apenas confirma que o formulário está pronto para envio.
+    formInfo.textContent = 'Mensagem pronta para envio! Conecte um backend ou serviço de e-mail para finalizar.';
+    formInfo.className = 'form-info success';
+    formContato.reset();
+  });
+
 });
-
-// ====================================
-// ESTATÍSTICAS (opcional - para desenvolvimento)
-// ====================================
-
-window.obterEstatisticas = () => {
-  const relatorio = doacaoController.obterRelatorioCampanha();
-  console.log('Relatório da Campanha:', relatorio);
-  return relatorio;
-};
-
-console.log('%c🍲 Bem-vindo ao Panela Solidária!', 'color: #FF6B00; font-size: 16px; font-weight: bold;');
-console.log('%cDigite obterEstatisticas() no console para ver o relatório da campanha.', 'color: #666; font-size: 12px;');

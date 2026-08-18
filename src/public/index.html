@@ -3,9 +3,421 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Panela Solidaria</title>
+    <meta name="description" content="Panela Solidária - Campanha de arrecadação de alimentos para combater a fome">
+    <meta name="theme-color" content="#FF6B00">
+    <title>Panela Solidária - Campanha de Doação de Alimentos</title>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    
+    <!-- HEADER FIXO -->
+    <header class="header" id="header">
+        <nav class="navbar">
+            <div class="container">
+                <!-- Logo -->
+                <div class="logo">
+                    <h1>🍲 Panela Solidária</h1>
+                </div>
+                
+                <!-- Menu hamburguer -->
+                <button class="menu-toggle" id="menuToggle" aria-label="Menu">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <!-- Menu navegação -->
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#inicio" class="nav-link">Início</a></li>
+                    <li><a href="#sobre" class="nav-link">Sobre</a></li>
+                    <li><a href="#como-doar" class="nav-link">Como Doar</a></li>
+                    <li><a href="#pontos-coleta" class="nav-link">Pontos de Coleta</a></li>
+                    <li><a href="#parceiros" class="nav-link">Parceiros</a></li>
+                    <li><a href="#contato" class="nav-link">Contato</a></li>
+                    <li><a href="#" class="btn-doar" id="btnDoarHeader">QUERO DOAR</a></li>
+                </ul>
+            </div>
+        </nav>
+    </header>
+
+    <!-- MAIN -->
+    <main>
+        <!-- SEÇÃO HERO -->
+        <section class="hero" id="inicio">
+            <div class="hero-overlay"></div>
+            <div class="hero-content">
+                <h2 class="hero-title">Uma Mão Amiga Começa com um Prato Cheio</h2>
+                <p class="hero-subtitle">Muitas famílias enfrentam a fome diariamente. Suas doações levam esperança, nutrição e dignidade a quem mais precisa.</p>
+                <button class="btn-cta" id="btnDoarHero">QUERO DOAR</button>
+            </div>
+        </section>
+
+        <!-- SEÇÃO SOBRE A CAMPANHA -->
+        <section class="sobre" id="sobre">
+            <div class="container">
+                <h2 class="section-title">Sobre a Campanha</h2>
+                
+                <!-- Timeline -->
+                <div class="timeline">
+                    <div class="timeline-item left" data-aos="fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Fev/Mar</h3>
+                            <p>Surge a ideia da campanha e começam as primeiras discussões sobre seu objetivo de combater a fome na comunidade.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right" data-aos="fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Abr/Mai</h3>
+                            <p>O projeto é planejado, definindo ações, público-alvo e formas de arrecadação de alimentos e recursos.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left" data-aos="fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Jun/Jul</h3>
+                            <p>A equipe organiza a campanha, prepara os materiais de divulgação e inicia a comunicação nas redes sociais.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item right" data-aos="fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Agosto</h3>
+                            <p>A campanha começa oficialmente a funcionar, com arrecadação, organização e primeiros registros de doações.</p>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item left" data-aos="fade-up">
+                        <div class="timeline-dot"></div>
+                        <div class="timeline-content">
+                            <h3>Próximos Meses</h3>
+                            <p>Expansão das ações, parcerias e realização das primeiras distribuições de alimentos às famílias em situação de vulnerabilidade.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO COMO DOAR -->
+        <section class="como-doar" id="como-doar">
+            <div class="container">
+                <h2 class="section-title">Como Doar</h2>
+                
+                <div class="cards-container">
+                    <!-- Card 1: Dinheiro/PIX -->
+                    <div class="card" data-aos="zoom-in">
+                        <div class="card-icon">💰</div>
+                        <h3>PIX / Dinheiro</h3>
+                        <p><strong>O que aceita:</strong></p>
+                        <ul>
+                            <li>Transferências via PIX</li>
+                            <li>Depósitos bancários</li>
+                            <li>Doações em dinheiro presencialmente</li>
+                        </ul>
+                        <p><strong>Destinação:</strong> Compra de alimentos e custeio da campanha.</p>
+                    </div>
+
+                    <!-- Card 2: Alimentos não perecíveis -->
+                    <div class="card" data-aos="zoom-in">
+                        <div class="card-icon">🥫</div>
+                        <h3>Alimentos Não Perecíveis</h3>
+                        <p><strong>O que aceita:</strong></p>
+                        <ul>
+                            <li>Arroz, feijão, macarrão</li>
+                            <li>Leite em pó, óleo de cozinha</li>
+                            <li>Enlatados (milho, ervilha, sardinha)</li>
+                            <li>Pão integral embalado</li>
+                        </ul>
+                        <p><strong>O que NÃO aceita:</strong> Alimentos vencidos ou danificados.</p>
+                    </div>
+
+                    <!-- Card 3: Itens de higiene -->
+                    <div class="card" data-aos="zoom-in">
+                        <div class="card-icon">🧼</div>
+                        <h3>Itens de Higiene</h3>
+                        <p><strong>O que aceita:</strong></p>
+                        <ul>
+                            <li>Sabonete, detergente, desinfetante</li>
+                            <li>Papel higiênico, papel toalha</li>
+                            <li>Pasta de dente, escova de dente</li>
+                            <li>Fraldas, absorventes</li>
+                        </ul>
+                        <p><strong>Importante:</strong> Sempre lacrados e com data de validade.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PONTOS DE COLETA -->
+        <section class="pontos-coleta" id="pontos-coleta">
+            <div class="container">
+                <h2 class="section-title">Pontos de Coleta</h2>
+                
+                <div class="grid-pontos">
+                    <!-- Ponto 1 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Centro Comunitário Brasil</h3>
+                        <p><strong>Endereço:</strong> Rua das Flores, 123 - Centro</p>
+                        <p><strong>Horário:</strong> Seg-Sex: 9h às 18h | Sáb: 9h às 14h</p>
+                        <p><strong>Contato:</strong> (11) 3333-3333</p>
+                    </div>
+
+                    <!-- Ponto 2 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Supermercado Solidário</h3>
+                        <p><strong>Endereço:</strong> Av. Paulista, 500 - Bela Vista</p>
+                        <p><strong>Horário:</strong> Seg-Dom: 8h às 20h</p>
+                        <p><strong>Contato:</strong> (11) 4444-4444</p>
+                    </div>
+
+                    <!-- Ponto 3 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Biblioteca Municipal</h3>
+                        <p><strong>Endereço:</strong> Praça da República, 789 - Vila Nova</p>
+                        <p><strong>Horário:</strong> Seg-Sex: 10h às 17h | Sáb: 10h às 13h</p>
+                        <p><strong>Contato:</strong> (11) 5555-5555</p>
+                    </div>
+
+                    <!-- Ponto 4 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Paróquia Santo Antônio</h3>
+                        <p><strong>Endereço:</strong> Rua da Paz, 456 - Santa Ana</p>
+                        <p><strong>Horário:</strong> Diariamente: 8h às 19h</p>
+                        <p><strong>Contato:</strong> (11) 6666-6666</p>
+                    </div>
+
+                    <!-- Ponto 5 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Associação de Bairro Esperança</h3>
+                        <p><strong>Endereço:</strong> Rua Esperança, 321 - Zona Leste</p>
+                        <p><strong>Horário:</strong> Seg-Sáb: 9h às 17h</p>
+                        <p><strong>Contato:</strong> (11) 7777-7777</p>
+                    </div>
+
+                    <!-- Ponto 6 -->
+                    <div class="ponto-card" data-aos="fade-up">
+                        <h3>📍 Escola Municipal Luz</h3>
+                        <p><strong>Endereço:</strong> Rua da Educação, 999 - Zona Oeste</p>
+                        <p><strong>Horário:</strong> Seg-Sex: 13h às 18h</p>
+                        <p><strong>Contato:</strong> (11) 8888-8888</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO PARCEIROS -->
+        <section class="parceiros" id="parceiros">
+            <div class="container">
+                <h2 class="section-title">Nossos Parceiros</h2>
+                
+                <div class="grid-parceiros">
+                    <div class="parceiro-logo" data-aos="zoom-in">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 1%3C/text%3E%3C/svg%3E" alt="Parceiro 1">
+                    </div>
+                    <div class="parceiro-logo" data-aos="zoom-in">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 2%3C/text%3E%3C/svg%3E" alt="Parceiro 2">
+                    </div>
+                    <div class="parceiro-logo" data-aos="zoom-in">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 3%3C/text%3E%3C/svg%3E" alt="Parceiro 3">
+                    </div>
+                    <div class="parceiro-logo" data-aos="zoom-in">
+                        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='150' height='80'%3E%3Crect fill='%23FF6B00' width='150' height='80'/%3E%3Ctext x='50%' y='50%' font-size='14' fill='white' text-anchor='middle' dy='.3em' font-family='Arial'%3EParceiro 4%3C/text%3E%3C/svg%3E" alt="Parceiro 4">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEÇÃO CONTATO -->
+        <section class="contato" id="contato">
+            <div class="container">
+                <h2 class="section-title">Entre em Contato</h2>
+                
+                <div class="contato-wrapper">
+                    <!-- Formulário -->
+                    <form class="formulario" id="formularioContato">
+                        <div class="form-group">
+                            <label for="nome">Nome *</label>
+                            <input type="text" id="nome" name="nome" required>
+                            <span class="error" id="erroNome"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="error" id="erroEmail"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem *</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                            <span class="error" id="erroMensagem"></span>
+                        </div>
+
+                        <button type="submit" class="btn-cta">Enviar Mensagem</button>
+                        <p class="form-info" id="formInfo"></p>
+                    </form>
+
+                    <!-- Redes sociais e info -->
+                    <div class="contato-info">
+                        <h3>Siga-nos nas Redes Sociais</h3>
+                        <div class="redes-sociais">
+                            <a href="https://www.facebook.com" target="_blank" rel="noopener" aria-label="Facebook">
+                                <span>📘 Facebook</span>
+                            </a>
+                            <a href="https://www.instagram.com" target="_blank" rel="noopener" aria-label="Instagram">
+                                <span>📷 Instagram</span>
+                            </a>
+                            <a href="https://www.twitter.com" target="_blank" rel="noopener" aria-label="Twitter">
+                                <span>🐦 Twitter</span>
+                            </a>
+                            <a href="https://www.whatsapp.com" target="_blank" rel="noopener" aria-label="WhatsApp">
+                                <span>💬 WhatsApp</span>
+                            </a>
+                        </div>
+
+                        <div class="contato-direto">
+                            <h3>Contato Direto</h3>
+                            <p><strong>Telefone:</strong> (11) 9999-9999</p>
+                            <p><strong>E-mail:</strong> contato@panelasolidaria.com.br</p>
+                            <p><strong>Endereço:</strong> Rua da Solidariedade, 1000 - São Paulo, SP</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- MODAL DOAÇÃO -->
+    <div class="modal" id="modalDoacao">
+        <div class="modal-content">
+            <span class="close" id="closeModal">&times;</span>
+            <h2>Realizar Doação</h2>
+            
+            <div class="modal-tabs">
+                <button class="tab-btn active" data-tab="cadastro-doador">Cadastro de Doador</button>
+                <button class="tab-btn" data-tab="cadastro-alimento">Cadastro de Alimento</button>
+                <button class="tab-btn" data-tab="registrar-doacao">Registrar Doação</button>
+                <button class="tab-btn" data-tab="visualizar-doacoes">Visualizar Doações</button>
+            </div>
+
+            <!-- Tab 1: Cadastro de Doador -->
+            <div class="tab-content active" id="cadastro-doador">
+                <h3>Cadastrar Doador</h3>
+                <form id="formCadastroDoador">
+                    <input type="text" placeholder="Nome completo" id="doadorNome" required>
+                    <input type="tel" placeholder="Telefone" id="doadorTelefone" required>
+                    <input type="email" placeholder="E-mail" id="doadorEmail" required>
+                    <input type="text" placeholder="Rua" id="doadorRua" required>
+                    <input type="text" placeholder="Número" id="doadorNumero" required>
+                    <input type="text" placeholder="Bairro" id="doadorBairro" required>
+                    <input type="text" placeholder="Cidade" id="doadorCidade" required>
+                    <input type="text" placeholder="CEP" id="doadorCep" required>
+                    <button type="submit" class="btn-modal">Cadastrar Doador</button>
+                </form>
+                <div id="msgCadastroDoador"></div>
+            </div>
+
+            <!-- Tab 2: Cadastro de Alimento -->
+            <div class="tab-content" id="cadastro-alimento">
+                <h3>Cadastrar Alimento</h3>
+                <form id="formCadastroAlimento">
+                    <input type="text" placeholder="Nome do alimento" id="alimentoNome" required>
+                    <input type="number" placeholder="Quantidade" id="alimentoQuantidade" step="0.1" required>
+                    <input type="text" placeholder="Unidade (kg, L, unidade, pacote)" id="alimentoUnidade" required>
+                    <textarea placeholder="Descrição (opcional)" id="alimentoDescricao"></textarea>
+                    <button type="submit" class="btn-modal">Cadastrar Alimento</button>
+                </form>
+                <div id="msgCadastroAlimento"></div>
+            </div>
+
+            <!-- Tab 3: Registrar Doação -->
+            <div class="tab-content" id="registrar-doacao">
+                <h3>Registrar Doação</h3>
+                <form id="formRegistrarDoacao">
+                    <select id="doacaoDoador" required>
+                        <option value="">Selecione um doador</option>
+                    </select>
+                    <div id="alimentosSelecionaveis"></div>
+                    <button type="submit" class="btn-modal">Registrar Doação</button>
+                </form>
+                <div id="msgRegistrarDoacao"></div>
+            </div>
+
+            <!-- Tab 4: Visualizar Doações -->
+            <div class="tab-content" id="visualizar-doacoes">
+                <h3>Doações Registradas</h3>
+                <div id="listaDoacoes"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>Sobre Panela Solidária</h3>
+                    <p>Uma campanha voluntária dedicada a combater a fome e levar dignidade às pessoas em situação de vulnerabilidade através da arrecadação de alimentos e doações.</p>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Links Rápidos</h3>
+                    <ul>
+                        <li><a href="#inicio">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#como-doar">Como Doar</a></li>
+                        <li><a href="#pontos-coleta">Pontos de Coleta</a></li>
+                        <li><a href="#contato">Contato</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com" target="_blank" rel="noopener">Facebook</a>
+                        <a href="https://www.instagram.com" target="_blank" rel="noopener">Instagram</a>
+                        <a href="https://www.twitter.com" target="_blank" rel="noopener">Twitter</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <p>&copy; 2026 Panela Solidária. Desenvolvido com ❤️ para a comunidade.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts - Camada de Modelos -->
+    <script src="../models/Endereco.js"></script>
+    <script src="../models/Alimento.js"></script>
+    <script src="../models/Doador.js"></script>
+    <script src="../models/Doacao.js"></script>
+
+    <!-- Scripts - Camada de Repositórios -->
+    <script src="../repositories/EnderecoRepository.js"></script>
+    <script src="../repositories/AlimentoRepository.js"></script>
+    <script src="../repositories/DoadorRepository.js"></script>
+    <script src="../repositories/DoacaoRepository.js"></script>
+
+    <!-- Scripts - Camada de Serviços -->
+    <script src="../services/DoadorService.js"></script>
+    <script src="../services/AlimentoService.js"></script>
+    <script src="../services/DoacaoService.js"></script>
+
+    <!-- Scripts - Camada de Controllers -->
+    <script src="../controllers/DoadorController.js"></script>
+    <script src="../controllers/AlimentoController.js"></script>
+    <script src="../controllers/DoacaoController.js"></script>
+
+    <!-- Scripts - Aplicação -->
+    <script src="js/app.js"></script>
 </body>
 </html>

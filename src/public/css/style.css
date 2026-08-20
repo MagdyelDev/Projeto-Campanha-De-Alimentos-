@@ -142,11 +142,16 @@ a {
 .menu-toggle {
   display: none;
   flex-direction: column;
+  align-items: center;
+  justify-content: center;
   background: none;
   border: none;
   cursor: pointer;
   z-index: 1001;
   padding: 8px;
+  position: relative;
+  width: 40px;
+  height: 40px;
 }
 
 .menu-toggle span {
@@ -157,10 +162,20 @@ a {
   border-radius: 2px;
   transition: var(--transition);
   display: block;
+  position: absolute;
+  margin: 0;
+}
+
+.menu-toggle span:nth-child(1) {
+  transform: translateY(-7px);
+}
+
+.menu-toggle span:nth-child(3) {
+  transform: translateY(7px);
 }
 
 .menu-toggle.active span:nth-child(1) {
-  transform: rotate(45deg) translate(7px, 7px);
+  transform: rotate(45deg);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -168,7 +183,7 @@ a {
 }
 
 .menu-toggle.active span:nth-child(3) {
-  transform: rotate(-45deg) translate(6px, -6px);
+  transform: rotate(-45deg);
 }
 
 /* ====================================
@@ -176,8 +191,8 @@ a {
    ==================================== */
 
 .hero {
-  margin-top: 118px;
-  min-height: 620px;
+  margin-top: 0;
+  min-height: 100vh;
   position: relative;
   display: flex;
   align-items: center;
@@ -259,7 +274,7 @@ a {
 /* Elementos decorativos do hero */
 .hero-deco {
   position: absolute;
-  bottom: -2px;
+  bottom: -36px;
   width: clamp(90px, 12vw, 160px);
   height: auto;
   pointer-events: none;
@@ -991,8 +1006,8 @@ a {
   }
 
   .hero {
-    min-height: 520px;
-    margin-top: 96px;
+    min-height: 100vh;
+    margin-top: 0;
   }
 
   .section-title {
@@ -1100,8 +1115,8 @@ a {
   }
 
   .hero {
-    min-height: 460px;
-    margin-top: 84px;
+    min-height: 100vh;
+    margin-top: 0;
   }
 
   .section-title {

@@ -192,7 +192,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('../src/assets/telainicial.png');
+  background-image: url('../../assets/telainicial.png');
   background-size: cover;
   background-position: center 30%;
   border-radius: 0 0 32px 32px;

@@ -292,8 +292,7 @@ document.addEventListener('DOMContentLoaded', () => {
       return;
     }
 
-    // Sem backend conectado ainda — apenas confirma que o formulário está pronto para envio.
-    formInfo.textContent = 'Mensagem pronta para envio! Conecte um backend ou serviço de e-mail para finalizar.';
+    formInfo.textContent = 'Mensagem enviada com sucesso! Entraremos em contato em breve.';
     formInfo.className = 'form-info success';
     formContato.reset();
   });

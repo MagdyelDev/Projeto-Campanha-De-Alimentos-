@@ -4,13 +4,13 @@
 
 /* VARIÁVEIS CSS — paleta extraída do arquivo Cores.png */
 :root {
-  --primary-color: #ED6325;   /* bg/cor2, text/cor1 */
-  --primary-dark: #C94E17;    /* tom mais escuro derivado do primary, para hover (não estava na paleta) */
-  --accent-amber: #F8A720;    /* bg/cor3, text/cor2 */
-  --cream: #fcfaf8;           /* bg/cor1 — usado nas seções claras/alternadas */
-  --text-dark: #642714;       /* bg/cor4, text/cor3 — marrom escuro, texto principal */
-  --text-gray: #93705C;       /* derivado do marrom, para texto secundário (não estava na paleta) */
-  --white: #FFFFFF;           /* bg/cor5, text/cor4 */
+  --primary-color: #ED6325;
+  --primary-dark: #C94E17;
+  --accent-amber: #F8A720;
+  --cream: #fcfaf8;
+  --text-dark: #642714;
+  --text-gray: #93705C;
+  --white: #FFFFFF;
   --border-radius: 14px;
   --radius-pill: 999px;
   --transition: all 0.3s ease;
@@ -192,7 +192,7 @@ a {
   position: absolute;
   inset: 0;
   z-index: -2;
-  background-image: url('../assets/telainicial.png');
+  background-image: url('../src/assets/telainicial.png');
   background-size: cover;
   background-position: center 30%;
   border-radius: 0 0 32px 32px;
@@ -256,7 +256,7 @@ a {
   box-shadow: 0 6px 20px rgba(237, 99, 37, 0.5);
 }
 
-/* Elementos decorativos do hero (assets/decorate.svg) */
+/* Elementos decorativos do hero */
 .hero-deco {
   position: absolute;
   bottom: -2px;
